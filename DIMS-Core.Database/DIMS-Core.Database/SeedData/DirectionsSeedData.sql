@@ -1,4 +1,4 @@
-﻿INSERT INTO [dbo].[Directions]
+﻿INSERT INTO [dbo].[Direction]
 (
     [Name],
     [Description]

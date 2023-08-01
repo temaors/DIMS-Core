@@ -1,4 +1,4 @@
-﻿INSERT INTO [dbo].[UserProfiles]
+﻿INSERT INTO [dbo].[UserProfile]
 (
     [DirectionId],
     [FirstName],

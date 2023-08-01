@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[UserProfiles]
+﻿CREATE TABLE [dbo].[UserProfile]
 (
     [UserId]                 INT           NOT NULL IDENTITY (1, 1),
     [FirstName]              NVARCHAR(50)  NOT NULL,
@@ -15,6 +15,6 @@
     [Email]                  NVARCHAR(50)  NOT NULL,
     [MobilePhone]            NVARCHAR(50)  NOT NULL,
 
-    CONSTRAINT PK_UserProfiles_UserId PRIMARY KEY (UserId),
-    CONSTRAINT FK_UserProfiles_Directions_DirectionId FOREIGN KEY (DirectionId) REFERENCES Directions (DirectionId)
+    CONSTRAINT PK_UserProfile_UserId PRIMARY KEY (UserId),
+    CONSTRAINT FK_UserProfile_Directions_DirectionId FOREIGN KEY (DirectionId) REFERENCES Direction (DirectionId)
 )

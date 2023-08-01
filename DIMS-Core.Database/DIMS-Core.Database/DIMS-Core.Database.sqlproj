@@ -57,17 +57,13 @@
   <Import Condition="'$(NetCoreBuild)' != 'true' AND '$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <Import Condition="'$(NetCoreBuild)' != 'true' AND '$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
-    <Folder Include="Procedures" />
     <Folder Include="Properties" />
-    <Folder Include="Tables" />
-    <Folder Include="Views" />
     <Folder Include="Functions" />
-    <Folder Include="SeedData" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\Directions.sql" />
     <Build Include="tables\UserProfiles.sql" />
-    <Build Include="Views\vUserProfiles.sql" />
+    <Build Include="Views\vUserProfile.sql" />
     <Build Include="Functions\GetFullAge.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +73,22 @@
   <Import Condition="'$(NetCoreBuild)' == 'true'" Project="$(NETCoreTargetsPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <PackageReference Condition="'$(NetCoreBuild)' == 'true'" Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Procedures\DeleteTask.sql" />
+    <Content Include="Procedures\DeleteUser.sql" />
+    <Content Include="Procedures\SetUserTaskAsFail.sql" />
+    <Content Include="Procedures\SetUserTaskAsSuccess.sql" />
+    <Content Include="SeedData\TaskSeedData.sql" />
+    <Content Include="SeedData\TaskStateSeedData.sql" />
+    <Content Include="Tables\Task.sql" />
+    <Content Include="Tables\TaskState.sql" />
+    <Content Include="Tables\TaskTrack.sql" />
+    <Content Include="Tables\UserTask.sql" />
+    <Content Include="Views\vTask.sql" />
+    <Content Include="Views\vUserProgress.sql" />
+    <Content Include="Views\vUserTask.sql" />
+    <Content Include="Views\vUserTrack.sql" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
