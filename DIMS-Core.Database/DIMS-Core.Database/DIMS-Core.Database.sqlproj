@@ -84,6 +84,7 @@
     <Content Include="Tables\Task.sql" />
     <Content Include="Tables\TaskState.sql" />
     <Content Include="Tables\TaskTrack.sql" />
+    <Content Include="Tables\updateConstraints.sql" />
     <Content Include="Tables\UserTask.sql" />
     <Content Include="Views\vTask.sql" />
     <Content Include="Views\vUserProgress.sql" />
