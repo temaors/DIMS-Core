@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using DIMS_Core.Common.Exceptions;
 using DIMS_Core.DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +35,7 @@ namespace DIMS_Core.DataAccessLayer.Repositories
         {
             if (id <= 0)
             {
+                throw new InvalidArgumentException("Parameter ID isn't correct. It must be greater than 0.");
                 // TODO: Task #3
                 // Create custom exception for invalid arguments
                 // based on abstract class BaseException
@@ -44,6 +47,7 @@ namespace DIMS_Core.DataAccessLayer.Repositories
 
             if (objectFromDB is null)
             {
+                throw new NonExistedObjectException(MethodBase.GetCurrentMethod().ToString(), "objectFromDB is null");
                 // TODO: Task #4
                 // Create custom exception for non existed object in database
                 // based on abstract class BaseException

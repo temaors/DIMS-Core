@@ -7,5 +7,13 @@ namespace DIMS_Core.Common.Exceptions
     /// </summary>
     public abstract class BaseException : Exception
     {
+        public BaseException(string paramName) : base(paramName)
+        {
+            
+        }
+
+        public BaseException(string methodName, string message)
+        {
+        }
     }
 }
