@@ -28,6 +28,6 @@ namespace DIMS_Core.DataAccessLayer.Interfaces
 
         Task Delete(int id);
 
-        Task Save();
+        Task<int> Save();
     }
 }

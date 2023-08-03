@@ -16,31 +16,31 @@ namespace DIMS_Core.DataAccessLayer.Repositories
         where TEntity : class
     {
         private readonly DbContext _context;
-        protected readonly DbSet<TEntity> Set;
+        protected readonly DbSet<TEntity> _set;
 
         protected Repository(DbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            Set = context.Set<TEntity>();
+            _set = context.Set<TEntity>();
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _set.AsNoTracking();
         }
 
-        public Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            if (id == 0)
+            if (id <= 0)
             {
                 // TODO: Task #3
                 // Create custom exception for invalid arguments
                 // based on abstract class BaseException
                 // throw new AnyException(string paramName);
             }
-
+            
             // TODO: type must be adjusted to entity type accordingly
-            object objectFromDB = null;
+            TEntity objectFromDB = await _set.FindAsync(id);
 
             if (objectFromDB is null)
             {
@@ -53,27 +53,38 @@ namespace DIMS_Core.DataAccessLayer.Repositories
             // RECOMMEND: It's better to create a helper static class for errors instead of throwing them
             // Ask us if you stucked and it looks ridiculous for you
 
-            throw new NotImplementedException();
+            return objectFromDB;
         }
 
-        public Task<TEntity> Create(TEntity entity)
+        public async Task<TEntity> Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            var created = await _set.AddAsync(entity);
+            return created.Entity;
         }
 
         public TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var updated = _set.Update(entity);
+            return updated.Entity;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0)
+            {
+                throw new ArgumentNullException();
+            } 
+            var entityToDelete = await _set.FindAsync(id);
+            if (entityToDelete == null)
+            {
+                throw new ArgumentNullException();
+            }
+            _set.Remove(entityToDelete);
         }
 
-        public Task Save()
+        public async Task<int> Save()
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync();
         }
 
         /// <summary>

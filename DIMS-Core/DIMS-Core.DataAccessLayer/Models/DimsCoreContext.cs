@@ -23,7 +23,7 @@ namespace DIMS_Core.DataAccessLayer.Models
         public virtual DbSet<TaskTrack> TaskTracks { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<UserTask> UserTasks { get; set; }
-        public virtual DbSet<vTask> vTasks { get; set; }
+        public virtual DbSet<VTask> vTasks { get; set; }
         public virtual DbSet<VUserProfile> vUserProfiles { get; set; }
         public virtual DbSet<VUserProgress> vUserProgresses { get; set; }
         public virtual DbSet<VUserTask> vUserTasks { get; set; }
@@ -153,7 +153,7 @@ namespace DIMS_Core.DataAccessLayer.Models
                     .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<vTask>(entity =>
+            modelBuilder.Entity<VTask>(entity =>
             {
                 entity.HasNoKey();
 

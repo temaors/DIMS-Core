@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DIMS_Core.DataAccessLayer.Models
 {
-    public partial class vTask
+    public partial class VTask
     {
         public int TaskId { get; set; }
         public string Name { get; set; }

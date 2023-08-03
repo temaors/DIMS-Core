@@ -5,23 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DIMS_Core.DataAccessLayer.Repositories
 {
-    public class VUserProfileRepository : IReadOnlyRepository<VUserProfile>
+    public class VUserProfileRepository : ReadOnlyRepository<VUserProfile>
     {
-        private readonly DimsCoreContext _context;
-
-        public VUserProfileRepository(DimsCoreContext context)
+        public VUserProfileRepository(DimsCoreContext context) : base(context)
         {
-            _context = context;
-        }
-
-        public IQueryable<VUserProfile> GetAll()
-        {
-            return _context.vUserProfiles.AsNoTracking();
-        }
-
-        public void Dispose()
-        {
-            _context?.Dispose();
         }
     }
 }
