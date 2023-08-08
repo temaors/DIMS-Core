@@ -11,10 +11,7 @@ namespace DIMS_Core.Tests.Repositories.Fixtures
     {
         public DirectionRepositoryFixture() : base(typeof(DirectionRepository))
         {
-            
         }
-
-        public int DirectionId { get; private set; }
 
         protected override void InitDatabase()
         {
@@ -23,7 +20,7 @@ namespace DIMS_Core.Tests.Repositories.Fixtures
                                                    Name = "Test Direction",
                                                    Description = "Test Description"
                                                });
-            DirectionId = entry.Entity.DirectionId;
+            EntityId = entry.Entity.DirectionId;
 
             Context.SaveChanges();
             entry.State = EntityState.Detached;

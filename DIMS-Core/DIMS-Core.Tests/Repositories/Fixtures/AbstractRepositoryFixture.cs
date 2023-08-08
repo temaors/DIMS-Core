@@ -12,6 +12,8 @@ public abstract class AbstractRepositoryFixture<TEntity> : IDisposable
     public DimsCoreContext Context { get; }
     public IRepository<TEntity> Repository { get; }
     
+    public int EntityId { get; set; }
+
     public AbstractRepositoryFixture(Type repositoryType)
     {
         Context = CreateContext();
