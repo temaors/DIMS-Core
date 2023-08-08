@@ -76,7 +76,7 @@ namespace DIMS_Core.DataAccessLayer.Repositories
         {
             if (id <= 0)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentException();
             } 
             var entityToDelete = await _set.FindAsync(id);
             if (entityToDelete == null)

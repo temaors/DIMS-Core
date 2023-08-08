@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DIMS_Core.Common.Exceptions;
 using DIMS_Core.DataAccessLayer.Models;
 using DIMS_Core.Tests.Repositories.Fixtures;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,7 @@ namespace DIMS_Core.Tests.Repositories
         {
             // Act
             var result = await _fixture.Repository.GetById(_fixture.DirectionId);
-
+            Console.WriteLine(_fixture.DirectionId);
             // Assert
             Assert.NotNull(result);
             Assert.Equal(_fixture.DirectionId, result.DirectionId);
@@ -55,9 +56,11 @@ namespace DIMS_Core.Tests.Repositories
         {
             // Arrange
             const int id = 0;
-
+            
             // Act, Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _fixture.Repository.GetById(id));
+            await Assert.ThrowsAsync<InvalidArgumentException>(() => _fixture.Repository.GetById(id));
+            
+            
         }
 
         [Fact]
@@ -67,7 +70,7 @@ namespace DIMS_Core.Tests.Repositories
             const int id = int.MaxValue;
 
             // Act, Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _fixture.Repository.GetById(id));
+            await Assert.ThrowsAsync<NonExistedObjectException>(() => _fixture.Repository.GetById(id));
         }
 
         [Fact]
