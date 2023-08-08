@@ -3,31 +3,20 @@ using DIMS_Core.DataAccessLayer.Interfaces;
 using DIMS_Core.DataAccessLayer.Models;
 using DIMS_Core.DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace DIMS_Core.Tests.Repositories.Fixtures
 {
-    internal class DirectionRepositoryFixture : IDisposable
+    internal class DirectionRepositoryFixture : AbstractRepositoryFixture<Direction>
     {
-        public DirectionRepositoryFixture()
+        public DirectionRepositoryFixture() : base(typeof(DirectionRepository))
         {
-            Context = CreateContext();
-            Repository = new DirectionRepository(Context);
-
-            InitDatabase();
+            
         }
-
-        public DimsCoreContext Context { get; }
-
-        public IRepository<Direction> Repository { get; }
 
         public int DirectionId { get; private set; }
 
-        public void Dispose()
-        {
-            Context.Dispose();
-        }
-
-        private void InitDatabase()
+        protected override void InitDatabase()
         {
             var entry = Context.Directions.Add(new Direction
                                                {
@@ -40,23 +29,5 @@ namespace DIMS_Core.Tests.Repositories.Fixtures
             entry.State = EntityState.Detached;
         }
 
-        private static DimsCoreContext CreateContext()
-        {
-            var options = GetOptions();
-
-            return new DimsCoreContext(options);
-        }
-
-        private static DbContextOptions<DimsCoreContext> GetOptions()
-        {
-            var builder = new DbContextOptionsBuilder<DimsCoreContext>().UseInMemoryDatabase(GetInMemoryDbName());
-
-            return builder.Options;
-        }
-
-        private static string GetInMemoryDbName()
-        {
-            return $"InMemory_{Guid.NewGuid()}";
-        }
     }
 }
